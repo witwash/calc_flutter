@@ -6,11 +6,11 @@ class ResultWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
+  Widget build(BuildContext context) => Expanded(
         flex: 2,
         child: Container(
-            color: Colors.blue,
-            child: const Center(child: Text('Result will be here'))));
-  }
+          color: Colors.blue,
+          child: const Center(child: Text('Result will be here')),
+        ),
+      );
 }

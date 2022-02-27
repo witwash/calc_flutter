@@ -6,10 +6,8 @@ class CalcPage extends StatelessWidget {
   const CalcPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(children: const [ResultWidget(), InputWidget()]),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: Column(children: const [ResultWidget(), InputWidget()]),
+      );
 }

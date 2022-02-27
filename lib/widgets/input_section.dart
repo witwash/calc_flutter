@@ -6,79 +6,46 @@ class InputWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-        flex: 3,
-        child: Container(
-          color: Colors.white,
-          child: Center(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const CalcButton(
-                    textValue: 'C',
-                  ),
-                  const CalcButton(textValue: 'percent'),
-                  const CalcButton(textValue: '/'),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.backspace,
-                        color: Colors.blue,
-                      ))
-                ],
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    TextButton(onPressed: () {}, child: const Text('7')),
-                    TextButton(onPressed: () {}, child: const Text('8')),
-                    TextButton(onPressed: () {}, child: const Text('9')),
-                  ],
-                ),
-              ),
-              Row(
-                children: [],
-              ),
-              Row(
-                children: [],
-              ),
-              Row(
-                children: [],
-              ),
-              Row(
-                children: [],
-              ),
-            ],
-          )),
-        ));
-  }
+  Widget build(BuildContext context) => Expanded(
+      flex: 3,
+      child: Container(
+        color: Colors.white,
+        child: const Center(child: InputField()),
+      ));
+}
+
+class InputField extends StatelessWidget {
+  const InputField({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => GridView.count(
+        crossAxisCount: 4,
+        children: const [],
+      );
 }
 
 class CalcButton extends StatelessWidget {
+  const CalcButton({Key? key, required this.textValue}) : super(key: key);
+
   static const TextStyle buttonsTextStyle =
       TextStyle(fontSize: 32, fontWeight: FontWeight.bold);
-  const CalcButton({Key? key, required this.textValue}) : super(key: key);
 
   final String textValue;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: ShapeDecoration(shape: Border.all(color: Colors.blueGrey)),
-      width: 100,
-      child: TextButton(
-        onPressed: () {},
-        child: FittedBox(
-          child: Text(
-            textValue,
-            style: buttonsTextStyle,
+  Widget build(BuildContext context) => Container(
+        decoration: ShapeDecoration(shape: Border.all(color: Colors.blueGrey)),
+        width: 100,
+        child: TextButton(
+          onPressed: () {},
+          child: FittedBox(
+            child: Text(
+              textValue,
+              style: buttonsTextStyle,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
