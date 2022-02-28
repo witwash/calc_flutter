@@ -23,64 +23,143 @@ class InputField extends StatelessWidget {
         shrinkWrap: true,
         primary: true,
         padding: EdgeInsets.zero,
-        children: const [
-          CalcButton.function(textValue: 'C'),
-          CalcButton.function(textValue: '%'),
-          CalcButton.function(textValue: '/'),
-          CalcButton.function(textValue: '<-'),
-          CalcButton(textValue: '7'),
-          CalcButton(textValue: '8'),
-          CalcButton(textValue: '9'),
-          CalcButton.function(textValue: '*'),
-          CalcButton(textValue: '4'),
-          CalcButton(textValue: '5'),
-          CalcButton(textValue: '6'),
-          CalcButton.function(textValue: '-'),
-          CalcButton(textValue: '1'),
-          CalcButton(textValue: '2'),
-          CalcButton(textValue: '3'),
-          CalcButton.function(textValue: '+'),
-          CalcButton.function(textValue: '+/-'),
-          CalcButton(textValue: '0'),
-          CalcButton.function(textValue: '.'),
-          CalcButton.function(
-              textValue: '=', backgroundColor: Colors.greenAccent),
+        children: [
+          TextCalcButton.function(textValue: 'C'),
+          TextCalcButton.function(textValue: '%'),
+          TextCalcButton.function(textValue: '/'),
+          IconCalcButton.function(iconValue: Icons.backspace),
+          TextCalcButton(textValue: '7'),
+          TextCalcButton(textValue: '8'),
+          TextCalcButton(textValue: '9'),
+          TextCalcButton.function(textValue: '*'),
+          TextCalcButton(textValue: '4'),
+          TextCalcButton(textValue: '5'),
+          TextCalcButton(textValue: '6'),
+          TextCalcButton.function(textValue: '-'),
+          TextCalcButton(textValue: '1'),
+          TextCalcButton(textValue: '2'),
+          TextCalcButton(textValue: '3'),
+          TextCalcButton.function(textValue: '+'),
+          TextCalcButton.function(textValue: '+/-'),
+          TextCalcButton(textValue: '0'),
+          TextCalcButton.function(textValue: '.'),
+          TextCalcButton.function(
+            textValue: '=',
+            customColor: Colors.greenAccent,
+          ),
         ],
       );
+}
+
+class IconCalcButton extends CalcButton {
+  IconCalcButton({
+    Key? key,
+    required this.iconValue,
+    this.customColor = CalcButton.defaultColor,
+    this.iconColor = Colors.blueAccent,
+  }) : super(
+          key: key,
+          backgroundColor: customColor,
+          customChild: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              iconValue,
+              color: iconColor,
+            ),
+          ),
+        );
+
+  IconCalcButton.function({
+    Key? key,
+    required this.iconValue,
+    this.customColor = CalcButton.defaultColor,
+    this.iconColor = Colors.blueAccent,
+  }) : super(
+          key: key,
+          backgroundColor: customColor,
+          customChild: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              iconValue,
+              color: iconColor,
+            ),
+          ),
+        );
+
+  final IconData iconValue;
+  final Color customColor;
+  final Color iconColor;
+}
+
+class TextCalcButton extends CalcButton {
+  TextCalcButton({
+    Key? key,
+    required this.textValue,
+    this.customColor = CalcButton.defaultColor,
+  }) : super(
+          key: key,
+          backgroundColor: customColor,
+          customChild: TextButton(
+            onPressed: () {},
+            child: Text(
+              textValue,
+              style: CalcButton.defaultButtonTextStyle,
+            ),
+          ),
+        );
+
+  TextCalcButton.function({
+    Key? key,
+    required this.textValue,
+    this.customColor = CalcButton.defaultColor,
+  }) : super.function(
+          key: key,
+          backgroundColor: customColor,
+          customChild: TextButton(
+            onPressed: () {},
+            child: Text(
+              textValue,
+              style: CalcButton.functionButtonTextStyle,
+            ),
+          ),
+        );
+
+  final String textValue;
+  final Color customColor;
 }
 
 class CalcButton extends StatelessWidget {
   const CalcButton({
     Key? key,
-    required this.textValue,
+    required this.customChild,
     this.backgroundColor = defaultColor,
   })  : textStyle = defaultButtonTextStyle,
         super(key: key);
 
   const CalcButton.function({
     Key? key,
-    required this.textValue,
+    required this.customChild,
     this.backgroundColor = defaultColor,
   })  : textStyle = functionButtonTextStyle,
         super(key: key);
 
   static const TextStyle defaultButtonTextStyle = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.w700,
+    fontSize: 30,
+    fontWeight: FontWeight.w500,
     color: Colors.grey,
   );
 
   static const TextStyle functionButtonTextStyle = TextStyle(
-    fontSize: 35,
+    fontSize: 36,
     fontWeight: FontWeight.bold,
     color: Colors.blueAccent,
   );
 
   static const Color defaultColor = Colors.white;
 
-  final String textValue;
   final TextStyle textStyle;
   final Color backgroundColor;
+  final Widget customChild;
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -91,13 +170,7 @@ class CalcButton extends StatelessWidget {
             shape: Border.all(color: Colors.blueGrey),
             color: backgroundColor,
           ),
-          child: TextButton(
-            onPressed: () {},
-            child: Text(
-              textValue,
-              style: textStyle,
-            ),
-          ),
+          child: customChild,
         ),
       );
 }
