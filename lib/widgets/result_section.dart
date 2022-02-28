@@ -5,12 +5,20 @@ class ResultWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  static const TextStyle textStyle = TextStyle(fontSize: 24);
+
   @override
   Widget build(BuildContext context) => Expanded(
-        flex: 2,
         child: Container(
+          padding: const EdgeInsets.all(5),
           color: Colors.blue,
-          child: const Center(child: Text('Result will be here')),
+          child: const Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              '12345678901234567890',
+              style: textStyle,
+            ),
+          ),
         ),
       );
 }

@@ -6,12 +6,10 @@ class InputWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Expanded(
-      flex: 3,
-      child: Container(
+  Widget build(BuildContext context) => Container(
         color: Colors.white,
-        child: const Center(child: InputField()),
-      ));
+        child: const InputField(),
+      );
 }
 
 class InputField extends StatelessWidget {
@@ -22,25 +20,56 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GridView.count(
         crossAxisCount: 4,
-        children: const [],
+        shrinkWrap: true,
+        primary: true,
+        padding: EdgeInsets.zero,
+        children: const [
+          CalcButton(textValue: 'C'),
+          CalcButton(textValue: '%'),
+          CalcButton(textValue: '/'),
+          CalcButton(textValue: '<-'),
+          CalcButton(textValue: '7'),
+          CalcButton(textValue: '8'),
+          CalcButton(textValue: '9'),
+          CalcButton(textValue: '*'),
+          CalcButton(textValue: '4'),
+          CalcButton(textValue: '5'),
+          CalcButton(textValue: '6'),
+          CalcButton(textValue: '-'),
+          CalcButton(textValue: '1'),
+          CalcButton(textValue: '2'),
+          CalcButton(textValue: '3'),
+          CalcButton(textValue: '+'),
+          CalcButton(textValue: '+/-'),
+          CalcButton(textValue: '0'),
+          CalcButton(textValue: '.'),
+          CalcButton(textValue: '='),
+        ],
       );
 }
 
 class CalcButton extends StatelessWidget {
-  const CalcButton({Key? key, required this.textValue}) : super(key: key);
+  const CalcButton({
+    Key? key,
+    required this.textValue,
+    this.textStyle = buttonsTextStyle,
+  }) : super(key: key);
 
   static const TextStyle buttonsTextStyle =
       TextStyle(fontSize: 32, fontWeight: FontWeight.bold);
 
   final String textValue;
+  final TextStyle textStyle;
 
   @override
-  Widget build(BuildContext context) => Container(
-        decoration: ShapeDecoration(shape: Border.all(color: Colors.blueGrey)),
-        width: 100,
-        child: TextButton(
-          onPressed: () {},
-          child: FittedBox(
+  Widget build(BuildContext context) => SizedBox(
+        height: 50,
+        width: 50,
+        child: DecoratedBox(
+          decoration:
+              ShapeDecoration(shape: Border.all(color: Colors.blueGrey)),
+          child: TextButton(
+            onPressed: () {},
             child: Text(
               textValue,
               style: buttonsTextStyle,
